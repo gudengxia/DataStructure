@@ -13,6 +13,35 @@ void DestroyList_Sq(SqList *L)
 	free(L->elem);
 }
 
+int ListEmpty_Sq(SqList L)
+{
+	if(L.len == 0)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+int ListLength_Sq(SqList L)
+{
+	return L.len;
+}
+
+Status GetElem_Sq(SqList L, int pos, ElemType *e)
+{
+	if(pos < 1 || pos > L.len)
+		return ERROR;
+	*e = L.elem[pos-1];
+	return OK;
+}
+
+Status LocateElem_Sq(SqList L, ElemType e, Status compare(ElemType, ElemType))
+{
+	int i;
+	for(i = 0; i < L.len; i++)
+		if(compare(L.elem[i], e))
+			return i+1;
+	return 0;
+}
 
 Status ListInsert_Sq(SqList *L, int loc, ElemType e)
 {
@@ -44,15 +73,14 @@ Status ListDelete_Sq(SqList *L, int loc, ElemType* e)
     return OK;
 }
 
-void Traverse_Sq(SqList L)
+Status Traverse_Sq(SqList L, Status visite(ElemType))
 {
 	int i;
-	printf("There are %d elements:\n", L.len);
-	printf("[");
+	//printf("There are %d elements:\n", L.len);
 	for(i = 0; i < L.len; i++)
-	{
-		printf("%d,", L.elem[i]);
-	}
-	printf("]\n");
+		if(!visite(L.elem[i]))
+            return ERROR;
+	//printf("\n");
+	return OK;
 }
 

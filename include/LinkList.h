@@ -2,34 +2,25 @@
 #define LINKLIST_H
 #include "mydef.h"
 
-typedef struct LinkNode{
-    ElemType e;
-    struct LinkNode* next;
-}LinkNode;
-
-//typedef LinkNode * LinkList;
-typedef struct LinkList{
-    LinkNode *h;
-    int len;
-}LinkList;
-
-/*LinkNode* Build_H();
-LinkNode* Build_T();*/
-
+typedef struct LinkNode
+{
+	ElemType data;
+	struct LinkNode *next; 
+}LinkNode, *LinkList;
 
 void InitList_L(LinkList* L);
+void DestroyList_L(LinkList* L);
 
-void Traverse_L(LinkList L);
-
-void DestroyList_L(LinkList *L);// LinkNode **L
-
-Status GetElem_L(LinkList L, int loc, LinkNode **e);
-
+void ClearList_L(LinkList* L);
+int ListEmpty_L(LinkList L);
 int ListLength_L(LinkList L);
+Status GetElem_L(LinkList L, int i, ElemType *e);
+LinkNode* LocateElem_L(LinkList L, ElemType e, Status compare(ElemType, ElemType));
 
-Status ListInsert_L(LinkList L, int loc, ElemType e);
+Status ListInsert_L(LinkList L, int i, ElemType e);
+Status ListDelete_L(LinkList L, int i, ElemType* e);
 
-Status ListDelete_L(LinkList L, int loc, ElemType *e);
+void ListTraverse_L(LinkList L, Status visit(ElemType e));
 
 #endif
 

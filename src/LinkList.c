@@ -1,10 +1,10 @@
 #include "LinkList.h"
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <assert.h>
 void InitList_L(LinkList *L)
 {
-	
+
 	LinkNode *p = (LinkNode*)malloc(sizeof(LinkNode));
 	p->next = NULL;
 	*L = p;
@@ -18,7 +18,7 @@ void DestroyList_L(LinkList* L)
 	p = *L;
 	while(p)
 	{
-		p = q;
+		q = p;
 		p = p->next;
 		free(q);
 	}
@@ -27,7 +27,7 @@ void DestroyList_L(LinkList* L)
 
 void ClearList_L(LinkList* L)
 {
-    LinkNode *p, *q; 
+    LinkNode *p, *q;
 	assert(*L != NULL);
 	p = (*L)->next;
 	(*L)->next = NULL;
@@ -41,7 +41,7 @@ void ClearList_L(LinkList* L)
 }
 
 int ListEmpty_L(LinkList L)
-{ 
+{
 	if(L == NULL || L->next == NULL)
                 return TRUE;
         else
@@ -58,15 +58,14 @@ int ListLength_L(LinkList L)
 	{
 		len++;
 		p = p->next;
-	} 
+	}
 	return len;
 }
 
 Status GetElem_L(LinkList L, int i, ElemType *e)
-{	
+{
 	int pos = 0;
-	ElemType e;
-	
+
 	if(L || i < 1);
 		return FALSE;
 
@@ -109,10 +108,10 @@ Status ListInsert_L(LinkList L, int i, ElemType e)
 		p = p->next;
 		j++;
 	}
-	 
+
 	if(p == NULL)
 		return ERROR;
-    
+
 	s = (LinkNode*)malloc(sizeof(LinkNode));
     s->data = e;
     s->next = p->next;
@@ -120,7 +119,7 @@ Status ListInsert_L(LinkList L, int i, ElemType e)
     return OK;
 }
 
-Status ListDelete_L(LinkList L, int i, ElemType e)
+Status ListDelete_L(LinkList L, int i, ElemType* e)
 {
 	int j = 0;
 	LinkNode *s, *p ;
@@ -133,12 +132,13 @@ Status ListDelete_L(LinkList L, int i, ElemType e)
 		p = p->next;
 		j++;
 	}
-	 
+
 	if(p->next == NULL)
 		return ERROR;
 
 	s = p->next;
 	p->next = s->next;
+	*e = s->data;
 	free(s);
 	return OK;
 }
@@ -152,6 +152,7 @@ Status ListTraverse_L(LinkList L, Status visit(ElemType e))
 	for(p = L->next; p != NULL; p = p->next)
         if(!visit(p->data))
 			return ERROR;
+	printf("\n");
 	return OK;
 
 }

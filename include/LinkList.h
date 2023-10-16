@@ -1,5 +1,6 @@
 #ifndef LINKLIST_H
 #define LINKLIST_H
+
 #include "mydef.h"
 
 typedef struct LinkNode
@@ -20,7 +21,7 @@ LinkNode* LocateElem_L(LinkList L, ElemType e, Status compare(ElemType, ElemType
 Status ListInsert_L(LinkList L, int i, ElemType e);
 Status ListDelete_L(LinkList L, int i, ElemType* e);
 
-void ListTraverse_L(LinkList L, Status visit(ElemType e));
+Status ListTraverse_L(LinkList L, Status visit(ElemType e));
 
 #endif
 

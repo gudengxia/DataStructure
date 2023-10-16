@@ -22,7 +22,7 @@ Status LocateElem_Sq(SqList L, ElemType e, int compare(ElemType, ElemType));
 Status ListInsert_Sq(SqList *L, int loc, ElemType e);
 Status ListDelete_Sq(SqList *L, int loc, ElemType* e);
 
-Status Traverse_Sq(SqList L, Status visite(ElemType));
+Status ListTraverse_Sq(SqList L, Status visite(ElemType));
 
 #endif
 

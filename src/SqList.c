@@ -73,14 +73,14 @@ Status ListDelete_Sq(SqList *L, int loc, ElemType* e)
     return OK;
 }
 
-Status Traverse_Sq(SqList L, Status visite(ElemType))
+Status ListTraverse_Sq(SqList L, Status visite(ElemType))
 {
 	int i;
 	//printf("There are %d elements:\n", L.len);
 	for(i = 0; i < L.len; i++)
 		if(!visite(L.elem[i]))
             return ERROR;
-	//printf("\n");
+	printf("\n");
 	return OK;
 }
 

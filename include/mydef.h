@@ -10,4 +10,7 @@
 typedef int Status;
 typedef int ElemType;
 
+Status visit(ElemType e);
+int equal(ElemType e1, ElemType e2);
+
 #endif 

@@ -1,7 +1,7 @@
 #ifndef SQSTACK_H
 #define SQSTACK_H
 #include "mydef.h"
-
+#define MAXSTACKSIZE 10
 typedef struct SqStack{
     ElemType *base;
     ElemType *top;
@@ -10,13 +10,15 @@ typedef struct SqStack{
 }SqStack;
 
 
-void InitStack(SqStack *S, int max_size);
-void DestroyStack(SqStack *S);
+void InitStack_Sq(SqStack *S);
+void DestroyStack_Sq(SqStack *S);
 
-Status Push(SqStack *S, ElemType e);
-Status Pop(SqStack *S, ElemType *e);
+Status Push_Sq(SqStack *S, ElemType e);
+Status Pop_Sq(SqStack *S, ElemType *e);
 
-int StackLen(SqStack S);
+Status GetTop_Sq(SqStack S, ElemType *e);
+int StackEmpty_Sq(SqStack S); 
+int StackLength_Sq(SqStack S);
 
 #endif // SQSTACK_H
 

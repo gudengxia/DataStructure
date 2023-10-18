@@ -8,7 +8,14 @@
 #define OVERFLOW -2
 
 typedef int Status;
-typedef int ElemType;
+#ifdef Maze
+    typedef struct ElemType{
+        int x;
+        int y;
+    }ElemType;
+#else
+    typedef int ElemType;
+#endif 
 
 Status visit(ElemType e);
 int equal(ElemType e1, ElemType e2);

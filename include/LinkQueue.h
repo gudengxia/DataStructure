@@ -21,5 +21,7 @@ int QueueLength_L(LinkQueue Q);
 Status EnQueue_L(LinkQueue* Q, ElemType e);
 Status DeQueue_L(LinkQueue* Q, ElemType* e);
 
+int QueueEmpty_L(LinkQueue Q);
+Status GetHead_L(LinkQueue Q, ElemType *e);
 #endif // LINKQUEUE_H
 

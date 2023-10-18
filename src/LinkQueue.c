@@ -56,3 +56,19 @@ Status DeQueue_L(LinkQueue* Q, ElemType* e)
     free(p);
     return OK;
 }
+
+int QueueEmpty_L(LinkQueue Q)
+{
+    if(Q.front == Q.rear)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+Status GetHead_L(LinkQueue Q, ElemType *e)
+{
+    if(Q.front == Q.rear)
+        return ERROR;
+    *e = Q.front->next->data;
+    return OK;
+}

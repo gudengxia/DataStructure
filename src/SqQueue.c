@@ -37,5 +37,20 @@ Status DeQueue_Sq(SqQueue* Q, ElemType* e)
     *e = Q->base[Q->front];
     Q->front = (Q->front + 1) % MAXQUEUESIZE;
     return OK;
+}
 
+int QueueEmpty_Sq(SqQueue Q)
+{
+    if(Q.front == Q.rear)
+        return TRUE;
+    else
+        return FALSE;
+}
+
+Status GetHead_Sq(SqQueue Q, ElemType *e)
+{
+    if(Q.front == Q.rear)
+        return ERROR;
+    *e = Q.base[Q.front];
+    return OK;
 }

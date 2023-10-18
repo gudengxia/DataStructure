@@ -1,0 +1,59 @@
+#include "SqStack.h"
+#include <stdlib.h>
+
+void InitStack_Sq(SqStack *S)
+{
+    S->base = (ElemType *)malloc(sizeof(ElemType) * MAXSTACKSIZE);
+    S->top = S->base;
+    S->stack_size = MAXSTACKSIZE;
+}
+
+void DestroyStack_Sq(SqStack *S)
+{
+    if(S->base)
+    {
+        free(S->base);
+        S->base = S->top = NULL;
+        S->stack_size = 0;
+    }
+}
+
+
+Status Push_Sq(SqStack *S, ElemType e)
+{
+    if(S->top - S->base == S->stack_size - 1)
+        return ERROR;
+    *(S->top) = e;
+    S->top = S->top + 1;
+    return OK;
+}
+
+Status Pop_Sq(SqStack *S, ElemType *e)
+{
+    if(S->top == S->base || S->stack_size <= 0)
+        return ERROR;
+    S->top = S->top - 1;
+    *e = *(S->top);
+    return OK;
+}
+
+int StackLength_Sq(SqStack S)
+{
+    return S.top - S.base;
+}
+
+Status GetTop_Sq(SqStack S, ElemType *e)
+{
+    if(S.top - S.base == 0)
+        return ERROR;
+    *e = *(S.top-1);
+    return OK;
+}
+
+int StackEmpty_Sq(SqStack S)
+{
+    if(S.top == S.base)
+        return 1;
+    else
+        return 0;
+}

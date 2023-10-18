@@ -1,9 +1,9 @@
 INCLUDE = ./include/
 SRC = ./src
 CFLAGS = -g
-OBJ = mydef.o SqList.o LinkList.o
+OBJ = mydef.o SqList.o LinkList.o SqStack.o LinkStack.o SqQueue.o LinkQueue.o
 
-app = app_list_sq app_list_l
+app = app_list_sq app_list_l app_stack_sq app_stack_l app_queue_sq app_queue_l
 
 all: ${app}
 
@@ -12,6 +12,18 @@ app_list_sq: app/app_list_sq.c liblist.dll
 
 app_list_l: app/app_list_l.c liblist.dll
 	gcc $< -o $@ -llist -L. -I${INCLUDE} ${CFLAGS}
+
+app_stack_sq: app/app_stack.c liblist.dll
+	gcc $< -o $@ -llist -L. -I${INCLUDE} ${CFLAGS}
+
+app_stack_l: app/app_stack.c liblist.dll
+	gcc $< -o $@ -llist -L. -I${INCLUDE} ${CFLAGS} -DLinkType
+
+app_queue_sq: app/app_queue.c liblist.dll
+	gcc $< -o $@ -llist -L. -I${INCLUDE} ${CFLAGS}
+
+app_queue_l: app/app_queue.c liblist.dll
+	gcc $< -o $@ -llist -L. -I${INCLUDE} ${CFLAGS} -DLinkType
 
 liblist.dll:  ${OBJ}
 	gcc -fPIC --shared $^ -o $@  
@@ -22,4 +34,4 @@ ${OBJ}: %.o: ${SRC}/%.c
 
 .PHONY:clean
 clean:
-	rm -f liblist.dll ${app}
+	rm -rf liblist.dll ${app} ${obj}

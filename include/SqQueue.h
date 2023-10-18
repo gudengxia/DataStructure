@@ -4,8 +4,6 @@
 
 #define MAXQUEUESIZE 10
 
-
-
 typedef struct SqQueue{
     ElemType *base;
     int front;
@@ -19,5 +17,8 @@ int QueueLength_Sq(SqQueue Q);
 
 Status EnQueue_Sq(SqQueue* Q, ElemType e);
 Status DeQueue_Sq(SqQueue* Q, ElemType* e);
+
+int QueueEmpty_Sq(SqQueue Q);
+Status GetHead_Sq(SqQueue, ElemType *e);
 #endif // QUEUE_SQ_H_INCLUDED
 

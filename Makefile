@@ -28,7 +28,7 @@ app_queue_l: app/app_queue.c liblist.dll
 maze_stack: app/maze/maze.c ${SRC}/LinkStack.c
 	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS} -DMazeSolutionByStack 
 
-maze_queue: app/maze/maze.c ${SRC}/LinkQueue.c
+maze_queue: app/maze/maze.c ${SRC}/LinkQueue.c ${SRC}/LinkStack.c
 	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS} -DMazeSolutionByQueue
 
 liblist.dll:  ${OBJ}

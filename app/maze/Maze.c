@@ -117,6 +117,16 @@ void MazeSolution(Location start, Location end)
     {
         printf("Sorry, there is no path.\n");
     }
+    else
+    {
+        printf("End<--\n");
+        while(!StackEmpty_L(S))
+        {
+            Pop_L(&S, &curpos);
+            printf("(%d, %d)<--", curpos.pos.x, curpos.pos.y);
+        }
+    }
+    printf("Start\n");
     DestroyStack_L(&S);
 }
 #endif 
@@ -134,11 +144,14 @@ void MazeSolution(Location start, Location end)
 
     while(!QueueEmpty_L(Q))
     {
-        DeQueue_L(&Q, &curpos);
+        GetHead_L(Q, &curpos);
         if(curpos.x == end.x && curpos.y == end.y)
         {
             break;
         }
+        
+        DeQueue_L(&Q, &curpos);
+       
         for(i = 1; i <= 4; i++)
         {
             nextpos = NextPos(curpos, i);
@@ -158,6 +171,31 @@ void MazeSolution(Location start, Location end)
     {
         Maze[start.x][start.y] = 1;
         PrintMaze();
+        LinkStack S;
+        
+        InitStack_L(&S);
+        Push_L(&S, end);
+        while(1)
+        {
+            GetTop_L(S, &curpos);
+            if(curpos.x == start.x && curpos.y == start.y)
+                break;
+            for(i = 1; i <=4; i++)
+            {
+                nextpos = NextPos(curpos, i);
+                if(Maze[nextpos.x][nextpos.y] == Maze[curpos.x][curpos.y] - 1)
+                    Push_L(&S, nextpos);
+            }
+        }
+
+        printf("Start-->");
+        while(!StackEmpty_L(S))
+        {
+            Pop_L(&S, &curpos);
+            printf("(%d, %d)-->", curpos.x, curpos.y);
+        }
+        printf("End\n");
+        DestroyStack_L(&S);
     }
     DestroyQueue_L(&Q);
 }
@@ -176,7 +214,7 @@ int main()
    
     MazeSolution(start,end);
     
-    PrintMaze();
+    //PrintMaze();
     return 0;
 }
 

@@ -1,7 +1,7 @@
 #ifndef SQSTACK_H
 #define SQSTACK_H
 #include "mydef.h"
-#define MAXSTACKSIZE 10
+#define MAXSTACKSIZE 100
 typedef struct SqStack{
     ElemType *base;
     ElemType *top;

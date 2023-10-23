@@ -22,7 +22,7 @@ int main()
     for(i = 0; i < 5; i++)
     {
         Function(Push)(&S, i*i);
-        printf("Push %d into the stack.\n");
+        printf("Push %d into the stack.\n", i*i);
     }
 
     for(i = 0; i < 5; i++)

@@ -94,6 +94,7 @@ void MazeSolution(Location start, Location end)
         {
             nextpos.direction = 1;
             Push_L(&S, nextpos);
+	    MakePrint(nextpos.pos);
             printf("Go to (%d, %d).\n", nextpos.pos.x, nextpos.pos.y);
         }
         else
@@ -103,7 +104,6 @@ void MazeSolution(Location start, Location end)
             {
                 curpos.direction++;
                 Push_L(&S, curpos);
-                MakePrint(curpos.pos);
                 printf("Change to direction %d at (%d, %d)\n", curpos.direction, curpos.pos.x, curpos.pos.y);
             }
             else
@@ -119,7 +119,7 @@ void MazeSolution(Location start, Location end)
     }
     else
     {
-        printf("End<--\n");
+        printf("End<--");
         while(!StackEmpty_L(S))
         {
             Pop_L(&S, &curpos);

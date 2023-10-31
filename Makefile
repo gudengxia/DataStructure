@@ -11,7 +11,7 @@ else
 endif
 
 
-app = app_list_sq app_list_l app_stack_sq app_stack_l app_queue_sq app_queue_l maze_stack maze_queue app_kmp
+app = app_list_sq app_list_l app_stack_sq app_stack_l app_queue_sq app_queue_l maze_stack maze_queue app_kmp app_tree
 
 all: ${app}
 
@@ -41,6 +41,9 @@ maze_queue: app/maze/maze.c ${SRC}/LinkQueue.c ${SRC}/LinkStack.c
 
 app_kmp: app/app_kmp.c ${SRC}/kmp.c
 	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS} 
+
+app_tree: app/app_tree.c ${SRC}/BiTree.c
+	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS}
 
 ${LibList}:  ${OBJ}
 	gcc -fPIC --shared $^ -o $@  

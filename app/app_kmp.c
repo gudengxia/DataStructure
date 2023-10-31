@@ -13,7 +13,7 @@ int main()
 
   for(i = 0; i < n; i++)
     {
-      printf("%2d", next[i]);
+      printf("%3d", next[i]);
     }
   printf("\n");
 

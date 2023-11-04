@@ -4,7 +4,7 @@
 #include "mydef.h"
 
 typedef struct QNode{
-    ElemType data;
+    QElemType data;
     struct QNode *next;
 }QNode;
 
@@ -18,10 +18,10 @@ void DestroyQueue_L(LinkQueue *Q);
 
 int QueueLength_L(LinkQueue Q);
 
-Status EnQueue_L(LinkQueue* Q, ElemType e);
-Status DeQueue_L(LinkQueue* Q, ElemType* e);
+Status EnQueue_L(LinkQueue* Q, QElemType e);
+Status DeQueue_L(LinkQueue* Q, QElemType* e);
 
 int QueueEmpty_L(LinkQueue Q);
-Status GetHead_L(LinkQueue Q, ElemType *e);
+Status GetHead_L(LinkQueue Q, QElemType *e);
 #endif // LINKQUEUE_H
 

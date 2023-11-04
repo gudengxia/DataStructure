@@ -3,7 +3,7 @@
 
 void InitStack_Sq(SqStack *S)
 {
-    S->base = (ElemType *)malloc(sizeof(ElemType) * MAXSTACKSIZE);
+    S->base = (SElemType *)malloc(sizeof(SElemType) * MAXSTACKSIZE);
     S->top = S->base;
     S->stack_size = MAXSTACKSIZE;
 }
@@ -19,7 +19,7 @@ void DestroyStack_Sq(SqStack *S)
 }
 
 
-Status Push_Sq(SqStack *S, ElemType e)
+Status Push_Sq(SqStack *S, SElemType e)
 {
     if(S->top - S->base == S->stack_size - 1)
         return ERROR;
@@ -28,7 +28,7 @@ Status Push_Sq(SqStack *S, ElemType e)
     return OK;
 }
 
-Status Pop_Sq(SqStack *S, ElemType *e)
+Status Pop_Sq(SqStack *S, SElemType *e)
 {
     if(S->top == S->base || S->stack_size <= 0)
         return ERROR;
@@ -42,7 +42,7 @@ int StackLength_Sq(SqStack S)
     return S.top - S.base;
 }
 
-Status GetTop_Sq(SqStack S, ElemType *e)
+Status GetTop_Sq(SqStack S, SElemType *e)
 {
     if(S.top - S.base == 0)
         return ERROR;

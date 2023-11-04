@@ -8,29 +8,34 @@
 #define OVERFLOW -2
 
 typedef int Status;
-#ifdef MazeSolutionByStack
-    typedef struct Location{
-        int x;
-        int y;
-    }Location;
+typedef int ElemType;
+typedef int TElemType;
 
+typedef struct Location{
+    int x;
+    int y;
+}Location;
+
+#ifdef MazeSolutionByStack
     typedef struct
     {
         //int ord;  //通道块在路径上的“序号”
         Location pos;  //通道块在迷宫中的“坐标位置”
         int direction;  //从此通道块走向下一通道块的“方向”
-    }ElemType; 
+    }SElemType; 
+    typedef int QElemType;
 #else
     #ifdef MazeSolutionByQueue
-        typedef struct Location{
-            int x;
-            int y;
-        }Location;
-        typedef Location ElemType;
-    #else
-        typedef int ElemType;
-    #endif
-#endif 
+        typedef Location SElemType;
+        typedef Location QElemType;
+#else
+    typedef int SElemType; 
+    typedef int QElemType;
+#endif
+#endif
+
+
+
 
 Status visit(ElemType e);
 int equal(ElemType e1, ElemType e2);

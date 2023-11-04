@@ -5,6 +5,7 @@
 
 #define MAXSIZE 100
 
+
 typedef struct SqList
 {
 	ElemType *elem;

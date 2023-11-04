@@ -1,6 +1,7 @@
 INCLUDE = ./include/
 SRC = ./src
 CFLAGS = -g
+CXXFLAGS = -g
 OBJ = mydef.o SqList.o LinkList.o SqStack.o LinkStack.o SqQueue.o LinkQueue.o
 
 #OS = ${shell uname}
@@ -42,8 +43,8 @@ maze_queue: app/maze/maze.c ${SRC}/LinkQueue.c ${SRC}/LinkStack.c
 app_kmp: app/app_kmp.c ${SRC}/kmp.c
 	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS} 
 
-app_tree: app/app_tree.c ${SRC}/BiTree.c
-	gcc $^ -o $@ -I${INCLUDE} ${CFLAGS}
+app_tree: app/app_binary_tree.cpp ${SRC}/BinaryTree.cpp ${SRC}/BiTree.c
+	g++ $^ -o $@ -I${INCLUDE} ${CXXFLAGS}
 
 ${LibList}:  ${OBJ}
 	gcc -fPIC --shared $^ -o $@  

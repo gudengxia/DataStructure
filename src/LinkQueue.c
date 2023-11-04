@@ -32,7 +32,7 @@ int QueueLength_L(LinkQueue Q)
     return len;
 }
 
-Status EnQueue_L(LinkQueue* Q, ElemType e)
+Status EnQueue_L(LinkQueue* Q, QElemType e)
 {
     QNode *p = (QNode*)malloc(sizeof(QNode));
     p->data = e;
@@ -42,7 +42,7 @@ Status EnQueue_L(LinkQueue* Q, ElemType e)
     return OK;
 }
 
-Status DeQueue_L(LinkQueue* Q, ElemType* e)
+Status DeQueue_L(LinkQueue* Q, QElemType* e)
 {
     if(Q->rear == Q->front)
         return ERROR;
@@ -65,7 +65,7 @@ int QueueEmpty_L(LinkQueue Q)
         return FALSE;
 }
 
-Status GetHead_L(LinkQueue Q, ElemType *e)
+Status GetHead_L(LinkQueue Q, QElemType *e)
 {
     if(Q.front == Q.rear)
         return ERROR;

@@ -68,11 +68,12 @@ void MakePrint(Location pos)
     //printf("(%d,%d)走不通\n",pos.x,pos.y);
     Maze[pos.x][pos.y] = -1;  //将走不通的块替换为墙壁
 }
+
 #ifdef MazeSolutionByStack
 void MazeSolution(Location start, Location end)
 {
     LinkStack S;
-    ElemType curpos, nextpos;
+    SElemType curpos, nextpos;
     InitStack_L(&S);
     curpos.pos = start;
     curpos.direction = 1;
@@ -94,7 +95,7 @@ void MazeSolution(Location start, Location end)
         {
             nextpos.direction = 1;
             Push_L(&S, nextpos);
-	    MakePrint(nextpos.pos);
+	        MakePrint(nextpos.pos);
             printf("Go to (%d, %d).\n", nextpos.pos.x, nextpos.pos.y);
         }
         else
@@ -136,7 +137,7 @@ void MazeSolution(Location start, Location end)
 {
     int i;
     LinkQueue Q;
-    ElemType curpos, nextpos;
+    QElemType curpos, nextpos;
 
     curpos = start;
     InitQueue_L(&Q);
@@ -222,7 +223,7 @@ int main()
 {
     SqStack S;
     Location curpos;
-    ElemType e;
+    SElemType e;
     int curstep;
 
     InitStack_L(&S);

@@ -3,7 +3,7 @@
 
 void InitQueue_Sq(SqQueue* Q)
 {
-    Q->base = (ElemType*) malloc(sizeof(ElemType) * MAXQUEUESIZE);
+    Q->base = (QElemType*) malloc(sizeof(QElemType) * MAXQUEUESIZE);
     Q->rear = Q->front = 0;
 }
 
@@ -20,7 +20,7 @@ int QueueLength_Sq(SqQueue Q)
     return (Q.rear - Q.front + MAXQUEUESIZE) % MAXQUEUESIZE;
 }
 
-Status EnQueue_Sq(SqQueue* Q, ElemType e)
+Status EnQueue_Sq(SqQueue* Q, QElemType e)
 {
     if((Q->rear + 1) % MAXQUEUESIZE == Q->front)
         return ERROR;
@@ -30,7 +30,7 @@ Status EnQueue_Sq(SqQueue* Q, ElemType e)
 
 }
 
-Status DeQueue_Sq(SqQueue* Q, ElemType* e)
+Status DeQueue_Sq(SqQueue* Q, QElemType* e)
 {
     if(Q->front == Q->rear)
         return ERROR;
@@ -47,7 +47,7 @@ int QueueEmpty_Sq(SqQueue Q)
         return FALSE;
 }
 
-Status GetHead_Sq(SqQueue Q, ElemType *e)
+Status GetHead_Sq(SqQueue Q, QElemType *e)
 {
     if(Q.front == Q.rear)
         return ERROR;

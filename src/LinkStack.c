@@ -19,7 +19,7 @@ void DestroyStack_L(LinkStack *S)
     *S = NULL;
 }
 
-Status Push_L(LinkStack *S, ElemType e)
+Status Push_L(LinkStack *S, SElemType e)
 {
     StackNode *p = (StackNode*)malloc(sizeof(StackNode));
     p->data = e;
@@ -28,7 +28,7 @@ Status Push_L(LinkStack *S, ElemType e)
     return OK;
 }
 
-Status Pop_L(LinkStack *S, ElemType *e)
+Status Pop_L(LinkStack *S, SElemType *e)
 {
     StackNode *p = *S;
     if(p == NULL)
@@ -39,7 +39,7 @@ Status Pop_L(LinkStack *S, ElemType *e)
      return OK;
 }
 
-Status GetTop_L(LinkStack S, ElemType *e)
+Status GetTop_L(LinkStack S, SElemType *e)
 {
     if(!S)
         return ERROR;
@@ -56,5 +56,13 @@ int StackEmpty_L(LinkStack S)
 } 
 int StackLength_L(LinkStack S)
 {
+    int i = 0;
+    StackNode* h = S;
+    while(h)
+    {
+        i++;
+        h = h->next;
+    }
 
+    return i;
 }

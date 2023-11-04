@@ -1,10 +1,11 @@
 #include "BiTree.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include "LinkStack.h"
 
 void CreateBiTree(BiTree *T)
 {
-    ElemType e;
+    TElemType e;
     BTNode *p;
     printf("Please input an integer:\n");
     scanf("%d", &e);
@@ -34,6 +35,7 @@ void DestroyBiTree(BiTree *T)
     }
 }
 
+
 void PrintBiTree(BiTree T, int layer)
 {
     int i;
@@ -44,5 +46,35 @@ void PrintBiTree(BiTree T, int layer)
             printf("  ");
         printf("%2d\n", T->data);
         PrintBiTree(T->lchild, layer+1);
+    }
+}
+
+void PreOrder(BiTree T)
+{
+    if(T)
+    {
+        printf("visit %d\n", T->data);
+        PreOrder(T->lchild);
+        PreOrder(T->rchild);
+    }
+}
+
+void InOrder(BiTree T)
+{
+    if(T)
+    {
+        InOrder(T->lchild);
+        printf("visit %d\n", T->data);
+        InOrder(T->rchild);
+    }
+}
+
+void PostOrder(BiTree T)
+{
+    if(T)
+    {
+        PostOrder(T->lchild);
+        PostOrder(T->rchild);
+        printf("visit %d\n", T->data);
     }
 }

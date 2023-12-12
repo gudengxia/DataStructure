@@ -10,4 +10,8 @@ void BubbleSort(ElemType a[], int n);
 
 void QuickSort(ElemType a[], int n);
 
+void SelectSort(ElemType a[], int n);
+
+void HeapSort(ElemType a[], int n);
+
 #endif 

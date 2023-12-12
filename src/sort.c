@@ -115,3 +115,71 @@ void QuickSort(ElemType a[], int n)
 {
 	QSort(a, 0, n-1);
 }
+
+void SelectSort(ElemType a[], int n)
+{
+	int i, j;
+	ElemType e, min_elem;
+	int pmin;
+	
+	for(i = 0; i < n-1; i++)
+	{
+		min_elem = a[i];
+		pmin = i;
+		
+		for(j = i+1; j < n; j++)
+		{
+			if(a[j] < min_elem)
+			{
+				min_elem = a[j];
+				pmin = j;
+			}
+		}
+		
+		if(i != pmin)
+		{
+			e = a[i];
+			a[i] = a[pmin];
+			a[pmin] = e;
+		}
+	}
+}
+
+void HeapAdjust(ElemType a[], int s, int m)
+{
+	int j;
+	ElemType e = a[s];
+	for(j = (s+1)*2-1; j <= m; j = 2 * (j+1) -1)
+	{
+		if(j+1 <= m && a[j] < a[j+1]) 
+			j++;
+		if(e >= a[j]) break;
+		a[s] = a[j]; 
+		s = j;
+	}
+	a[s] = e;
+}
+
+void CreatHeap(ElemType a[], int n)
+{
+	int i;
+	for(i = n/2-1; i >= 0; i--)
+	{
+		HeapAdjust(a, i, n-1);
+	}
+}
+
+void HeapSort(ElemType a[], int n)
+{
+	int i;
+	ElemType winner;
+	
+	CreatHeap(a, n-1);
+	for(i = n-1; i > 0; i--)
+	{
+		winner = a[0];
+		a[0] = a[i];
+		a[i] = winner;
+		HeapAdjust(a, 0, i-1);
+	}
+}

@@ -21,6 +21,35 @@ void InsertSort(ElemType a[], int n)
 	}
 }
 
+void BFInsertSort(ElemType a[], int n)
+{
+	int i, j;
+	int low, high, mid;
+	ElemType e;
+	
+	for(i = 1; i < n; i++)
+	{
+		e = a[i];
+		low = 0, high = i-1;
+		while(low <= high)
+		{
+			mid = (low + high) / 2;
+			if(e < a[mid])
+			{
+				high = mid - 1;
+			}
+			else
+			{
+				low = mid + 1;
+			}
+		}
+		
+		for(j = i-1; j >= low; j--)
+			a[j+1] = a[j];
+		a[high+1] = e;
+	}
+}
+
 void BinaryInsertSort(ElemType a[], int n)
 {
 	int i, j;

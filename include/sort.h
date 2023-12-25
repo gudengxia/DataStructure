@@ -4,6 +4,8 @@ typedef int ElemType;
 
 void InsertSort(ElemType a[], int n);
 
+void BFInsertSort(ElemType a[], int n);
+
 void BinaryInsertSort(ElemType a[], int n);
 
 void BubbleSort(ElemType a[], int n);

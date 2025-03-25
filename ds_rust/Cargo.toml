@@ -1,0 +1,10 @@
+[package]
+name = "ds_rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+
+[lib]
+lib = "mylib"
+path = "src/lib.rs"

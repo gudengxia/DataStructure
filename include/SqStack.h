@@ -10,8 +10,8 @@ typedef struct SqStack{
 }SqStack;
 
 
-void InitStack_Sq(SqStack *S);
-void DestroyStack_Sq(SqStack *S);
+Status InitStack_Sq(SqStack *S);
+Status DestroyStack_Sq(SqStack *S);
 
 Status Push_Sq(SqStack *S, SElemType e);
 Status Pop_Sq(SqStack *S, SElemType *e);

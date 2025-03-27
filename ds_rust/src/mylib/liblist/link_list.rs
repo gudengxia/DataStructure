@@ -47,51 +47,45 @@ impl<T> List<T> for LinkList<T> where T: std::default::Default + Copy + std::fmt
 
 
     fn get(&self, pos: usize) -> Result<T, &'static str> {
-        let mut i = 0 as usize;
-        let mut p = self.h.as_ref().map(|node| Rc::clone(node));
+        let mut i = 1 as usize;
+        let mut p = self.h.as_ref().unwrap().borrow().next.as_ref().map(|node| Rc::clone(node));
 
-        while i < pos{
-            if let Some(node) = p{
-                p = node.borrow().next.as_ref().map(|next| Rc::clone(next));
-            }
-            else {
-                return Err("get: position error");
-            }
+        while i < pos && p.is_some(){
+            p = p.unwrap().borrow().next.as_ref().map(|next| Rc::clone(next));
             i += 1;
         }
-        
+        if p.is_none() || i != pos{
+            return Err("get: position error");
+        }
         Ok(p.unwrap().borrow().data)  
     }
 
     fn set(&mut self, pos: usize, e: T) -> Result<(), &'static str> {
-        let mut i = 0 as usize;
-        let mut p = self.h.as_ref().map(|node| Rc::clone(node));
+        let mut i = 1 as usize;
+        let mut p = self.h.as_ref().unwrap().borrow().next.as_ref().map(|node| Rc::clone(node));
 
-        while i < pos{
-            if let Some(node) = p{
-                p = node.borrow().next.as_ref().map(|next| Rc::clone(next));
-            }
-            else {
-                return Err("set: position error");
-            }
-            i += 1;    
+        while i < pos && p.is_some(){
+            p = p.unwrap().borrow().next.as_ref().map(|next| Rc::clone(next));
+            i += 1;
+        }
+        if p.is_none() || i != pos{
+            return Err("get: position error");
         }
         p.unwrap().borrow_mut().data = e;
-        Ok(())
+        Ok(())  
     }
 
     fn insert(&mut self, pos: usize, e: T) -> Result<(), &'static str> {
         let mut i = 0 as usize; 
         let mut p = self.h.as_ref().map(|node| Rc::clone(node));
 
-        while i < pos-1{
-            if let Some(node) = p{
-                p = node.borrow().next.as_ref().map(|next| Rc::clone(next));
-            }
-            else {
-                return Err("insert: position error");
-            }
+        while p.is_some() && i < pos-1{
+            let q = p.as_ref().unwrap().borrow().next.as_ref().map(|next| Rc::clone(next));
             i += 1;
+            p = q;
+        }
+        if p.is_none() || i > pos-1{
+            return Err("insert: position error");
         }
         let node = Rc::new(RefCell::new(LinkNode::<T>::new()));
         node.borrow_mut().data = e;
@@ -104,20 +98,15 @@ impl<T> List<T> for LinkList<T> where T: std::default::Default + Copy + std::fmt
         let mut p = self.h.as_ref().map(|node| Rc::clone(node));
         let mut i = 0 as usize;
 
-        while i < pos-1{
-            if let Some(node) = p{
-                p = node.borrow().next.as_ref().map(|next| Rc::clone(next));
-            }
-            else {
-                return Err("delete: position error");
-            }
+        while p.is_some() && i < pos-1{
+            let t = p.as_ref().unwrap().borrow().next.as_ref().map(|next| Rc::clone(next));
+            p = t;
             i += 1;
         }
-
         let q = p.as_ref().unwrap().borrow().next.as_ref().map(|next| Rc::clone(next));
-        if q.is_none(){
+        if q.is_none() || i > pos-1{
             return Err("delete: position error");
-        }
+        }       
         let e = p.as_ref().unwrap().borrow().data;
         p.as_ref().unwrap().borrow_mut().next = q.as_ref().unwrap().borrow_mut().next.take(); 
         Ok(e)

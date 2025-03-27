@@ -13,8 +13,8 @@ typedef struct LinkQueue{
     QNode *rear;
 }LinkQueue;
 
-void InitQueue_L(LinkQueue *Q);
-void DestroyQueue_L(LinkQueue *Q);
+Status InitQueue_L(LinkQueue *Q);
+Status DestroyQueue_L(LinkQueue *Q);
 
 int QueueLength_L(LinkQueue Q);
 

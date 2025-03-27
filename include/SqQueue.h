@@ -10,8 +10,8 @@ typedef struct SqQueue{
     int rear;
 } SqQueue;
 
-void InitQueue_Sq(SqQueue* Q);
-void DestroyQueue_Sq(SqQueue *Q);
+Status InitQueue_Sq(SqQueue* Q);
+Status DestroyQueue_Sq(SqQueue *Q);
 
 int QueueLength_Sq(SqQueue Q);
 

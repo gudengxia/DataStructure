@@ -1,12 +1,13 @@
 #include "LinkQueue.h"
 #include <stdlib.h>
-void InitQueue_L(LinkQueue *Q)
+Status InitQueue_L(LinkQueue *Q)
 {
     QNode* p = (QNode*)malloc(sizeof(QNode));
     p->next = NULL;
     Q->front = Q->rear = p;
+    return OK;
 }
-void DestroyQueue_L(LinkQueue *Q)
+Status DestroyQueue_L(LinkQueue *Q)
 {
     QNode* p = Q->front;
     QNode* q;
@@ -17,6 +18,7 @@ void DestroyQueue_L(LinkQueue *Q)
         free(q);
     }
     Q->front = Q->rear = NULL;
+    return OK;
 }
 
 int QueueLength_L(LinkQueue Q)

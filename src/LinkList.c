@@ -2,19 +2,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-void InitList_L(LinkList *L)
+Status InitList_L(LinkList *L)
 {
 
 	LinkNode *p = (LinkNode*)malloc(sizeof(LinkNode));
 	p->next = NULL;
 	*L = p;
+	return OK;
 }
 
 
-void DestroyList_L(LinkList* L)
+Status DestroyList_L(LinkList* L)
 {
 	LinkNode *p, *q;
-	assert(L != NULL);
+	if(*L == NULL)
+		return ERROR;
 	p = *L;
 	while(p)
 	{
@@ -23,12 +25,14 @@ void DestroyList_L(LinkList* L)
 		free(q);
 	}
 	*L = NULL;
+	return OK;
 }
 
-void ClearList_L(LinkList* L)
+Status ClearList_L(LinkList* L)
 {
     LinkNode *p, *q;
-	assert(*L != NULL);
+	if(*L == NULL)
+		return ERROR;
 	p = (*L)->next;
 	(*L)->next = NULL;
 
@@ -38,6 +42,7 @@ void ClearList_L(LinkList* L)
 		p = p->next;
 		free(q);
 	}
+	return OK;
 }
 
 int ListEmpty_L(LinkList L)

@@ -1,18 +1,20 @@
 #include "SqQueue.h"
 #include <stdlib.h>
 
-void InitQueue_Sq(SqQueue* Q)
+Status InitQueue_Sq(SqQueue* Q)
 {
     Q->base = (QElemType*) malloc(sizeof(QElemType) * MAXQUEUESIZE);
     Q->rear = Q->front = 0;
+    return OK;
 }
 
-void DestroyQueue_Sq(SqQueue *Q)
+Status DestroyQueue_Sq(SqQueue *Q)
 {
     if(Q->base)
         free(Q->base);
     Q->base = NULL;
     Q->front = Q->rear = -1;
+    return OK;
 }
 
 int QueueLength_Sq(SqQueue Q)

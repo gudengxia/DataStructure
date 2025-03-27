@@ -1,12 +1,13 @@
 #include "LinkStack.h"
 #include <stdlib.h>
 
-void InitStack_L(LinkStack *S)
+Status InitStack_L(LinkStack *S)
 {
     *S = NULL;
+    return OK;
 }
 
-void DestroyStack_L(LinkStack *S)
+Status DestroyStack_L(LinkStack *S)
 {
     StackNode *p = *S;
     StackNode *q;
@@ -17,6 +18,7 @@ void DestroyStack_L(LinkStack *S)
         free(q);
     }
     *S = NULL;
+    return OK;
 }
 
 Status Push_L(LinkStack *S, SElemType e)

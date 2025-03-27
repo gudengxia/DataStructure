@@ -12,8 +12,8 @@ typedef struct SqList
 	int len;
 }SqList;
 
-void InitList_Sq(SqList *L);
-void DestroyList_Sq(SqList *L);
+Status InitList_Sq(SqList *L);
+Status DestroyList_Sq(SqList *L);
 
 int ListEmpty_Sq(SqList L);
 int ListLength_Sq(SqList L);

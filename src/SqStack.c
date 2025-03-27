@@ -1,14 +1,15 @@
 #include "SqStack.h"
 #include <stdlib.h>
 
-void InitStack_Sq(SqStack *S)
+Status InitStack_Sq(SqStack *S)
 {
     S->base = (SElemType *)malloc(sizeof(SElemType) * MAXSTACKSIZE);
     S->top = S->base;
     S->stack_size = MAXSTACKSIZE;
+    return OK;
 }
 
-void DestroyStack_Sq(SqStack *S)
+Status DestroyStack_Sq(SqStack *S)
 {
     if(S->base)
     {
@@ -16,6 +17,7 @@ void DestroyStack_Sq(SqStack *S)
         S->base = S->top = NULL;
         S->stack_size = 0;
     }
+    return OK;
 }
 
 

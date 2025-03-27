@@ -2,15 +2,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-void InitList_Sq(SqList *L)
+Status InitList_Sq(SqList *L)
 {
 	L->elem = (ElemType*)malloc(sizeof(ElemType) * MAXSIZE);
 	L->len = 0;
+	return OK;
 }
 
-void DestroyList_Sq(SqList *L)
+Status DestroyList_Sq(SqList *L)
 {
 	free(L->elem);
+	return OK;
 }
 
 int ListEmpty_Sq(SqList L)

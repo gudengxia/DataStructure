@@ -9,8 +9,8 @@ typedef struct StackNode
 
 typedef StackNode *LinkStack;
 
-void InitStack_L(LinkStack *S);
-void DestroyStack_L(LinkStack *S);
+Status InitStack_L(LinkStack *S);
+Status DestroyStack_L(LinkStack *S);
 
 Status Push_L(LinkStack *S, SElemType e);
 Status Pop_L(LinkStack *S, SElemType *e);

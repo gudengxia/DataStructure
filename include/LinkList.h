@@ -9,10 +9,10 @@ typedef struct LinkNode
 	struct LinkNode *next; 
 }LinkNode, *LinkList;
 
-void InitList_L(LinkList* L);
-void DestroyList_L(LinkList* L);
+Status InitList_L(LinkList* L);
+Status DestroyList_L(LinkList* L);
 
-void ClearList_L(LinkList* L);
+Status ClearList_L(LinkList* L);
 int ListEmpty_L(LinkList L);
 int ListLength_L(LinkList L);
 Status GetElem_L(LinkList L, int i, ElemType *e);

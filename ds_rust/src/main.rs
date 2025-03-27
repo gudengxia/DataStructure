@@ -43,6 +43,19 @@ fn main() {
     }
     l.traverse();
 
+    let n = l.length();
+    for i in 0..=(n+1){
+        match l.get(i){
+            Ok(e) =>{
+                if e > 0{
+                    let _ = l.set(i, e*100);
+                }
+            }
+            Err(err) => println!("get at pos {} error:{}", i, err)
+        }
+    }
+    l.traverse();
+    
     pos = 3;
     let mut ans = l.delete(pos);
     match ans {
@@ -50,6 +63,8 @@ fn main() {
         Err(err) => println!("delete at pos {} error:{}", pos, err)
     }
     l.traverse();
+
+    
 
     pos = 1; 
     ans = l.delete(pos);
@@ -76,6 +91,6 @@ fn main() {
     l.traverse();
 
     l.clear();
-    l.traverse();
-    println!("{}", l.length());
+    
+    println!("len = {}", l.length());
 }

@@ -179,80 +179,90 @@ mod test{
     fn test_double_link_list()
     {
         let mut l = DLinkList::<i32>::new();
-    let mut pos;
-    let mut e;
-    for i in 1..=3{
-        let r = l.insert(i, i as i32);
+        let mut pos;
+        let mut e;
+        for i in 1..=3{
+            let r = l.insert(i, i as i32);
+            match r {
+                Ok(()) => println!("insert {} at pos {} ok", i, i),
+                Err(err) => println!("insert {} at pos {} error:{}", i, i, err)
+            }
+        }    
+        l.traverse();
+
+        pos = 1;
+        e = -1;  
+        let mut r = l.insert(1, -1);
         match r {
-            Ok(()) => println!("insert {} at pos {} ok", i, i),
-            Err(err) => println!("insert {} at pos {} error:{}", i, i, err)
+            Ok(()) => println!("insert {} at {} ok", e, pos),
+            Err(err) => println!("insert {} at {} error:{}", e , pos, err)
         }
-    }    
-    l.traverse();
+        l.traverse();
 
-    pos = 1;
-    e = -1;  
-    let mut r = l.insert(1, -1);
-    match r {
-        Ok(()) => println!("insert {} at {} ok", e, pos),
-        Err(err) => println!("insert {} at {} error:{}", e , pos, err)
-    }
-    l.traverse();
-
-    pos = 7;
-    e = -2;
-    r = l.insert(pos, e);
-    match r {
-        Ok(()) => println!("insert {} at {} ok", e, pos),
-        Err(err) =>println!("insert {} at {} error:{}", e , pos, err)
-    }
-    l.traverse();
-    println!("len={}", l.length());
+        pos = 7;
+        e = -2;
+        r = l.insert(pos, e);
+        match r {
+            Ok(()) => println!("insert {} at {} ok", e, pos),
+            Err(err) =>println!("insert {} at {} error:{}", e , pos, err)
+        }
+        l.traverse();
+        println!("len={}", l.length());
 
 
-    pos = 3;
-    e = -5;
-    r = l.insert(pos, e);
-    match r {
-        Ok(()) => println!("insert {} at {} ok", e, pos),
-        Err(err) => println!("insert {} at {} error:{}", e , pos, err)
-    }
-    l.traverse();
+        pos = 3;
+        e = -5;
+        r = l.insert(pos, e);
+        match r {
+            Ok(()) => println!("insert {} at {} ok", e, pos),
+            Err(err) => println!("insert {} at {} error:{}", e , pos, err)
+        }
+        l.traverse();
+        let n = l.length();
+        for i in 0..=(n+1){
+            match l.get(i){
+                Ok(e) =>{
+                    if e > 0{
+                        let _ = l.set(i, e*100);
+                    }
+                }
+                Err(err) => println!("get at pos {} error:{}", i, err)
+            }
+        }
+        l.traverse();
+        pos = 3;
+        let mut ans = l.delete(pos);
+        match ans {
+            Ok(e) => println!("delete {} at {}", e, pos),
+            Err(err) => println!("delete at pos {} error:{}", pos, err)
+        }
+        l.traverse();
 
-    pos = 3;
-    let mut ans = l.delete(pos);
-    match ans {
-        Ok(e) => println!("delete {} at {}", e, pos),
-        Err(err) => println!("delete at pos {} error:{}", pos, err)
-    }
-    l.traverse();
+        pos = 1; 
+        ans = l.delete(pos);
+        match ans {
+            Ok(e) => println!("delete {} at {}", e, pos),
+            Err(err) => println!("delete at pos {} error:{}", pos, err)
+        }
+        l.traverse();
 
-    pos = 1; 
-    ans = l.delete(pos);
-    match ans {
-        Ok(e) => println!("delete {} at {}", e, pos),
-        Err(err) => println!("delete at pos {} error:{}", pos, err)
-    }
-    l.traverse();
+        pos = 4;
+        ans = l.delete(pos);
+        match ans {
+            Ok(e) => println!("delete {} at {}", e, pos),
+            Err(err) => println!("delete at pos {} error:{}", pos, err)
+        }
+        l.traverse();
 
-    pos = 4;
-    ans = l.delete(pos);
-    match ans {
-        Ok(e) => println!("delete {} at {}", e, pos),
-        Err(err) => println!("delete at pos {} error:{}", pos, err)
-    }
-    l.traverse();
+        pos = 4;
+        ans = l.delete(pos);
+        match ans {
+            Ok(e) => println!("delete {} at {}", pos, e),
+            Err(err) => println!("delete at pos {} error:{}", pos, err)
+        }
+        l.traverse();
 
-    pos = 4;
-    ans = l.delete(pos);
-    match ans {
-        Ok(e) => println!("delete {} at {}", pos, e),
-        Err(err) => println!("delete at pos {} error:{}", pos, err)
-    }
-    l.traverse();
-
-    l.clear();
-    l.traverse();
-    println!("{}", l.length());
+        l.clear();
+        println!("{}", l.length());
     }
 }

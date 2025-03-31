@@ -10,16 +10,16 @@ void get_next(char T[], int next[])
     {
       if(j == -1 || T[i] == T[j])
         {
-	  ++i;
-	  ++j;
-	  if(T[i] != T[j])
-	    next[i] = j;
-	  else
-	    next[i] = next[j];
+          ++i;
+          ++j;
+          if(T[i] != T[j])
+            next[i] = j;
+          else
+            next[i] = next[j];
         }
-      else
+        else
         {
-	  j = next[j];
+          j = next[j];
         }
     }
 }

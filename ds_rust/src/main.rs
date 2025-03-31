@@ -1,7 +1,14 @@
-use ds_rust::mylib::liblist::list::List;
+//use ds_rust::mylib::liblist::list::List;
 //use ds_rust::mylib::liblist::sq_list::SqList;
-use ds_rust::mylib::liblist::double_link_list::DLinkList; 
-fn main() { 
+//use ds_rust::mylib::liblist::double_link_list::DLinkList;
+use ds_rust::mylib::app::libqueen::EQueen;
+fn main(){
+    let mut q = EQueen::new(8);
+    let num_of_solution  = q.solve();
+    println!("number of solution: {}", num_of_solution);
+}
+
+/* fn main() { 
     let mut l = DLinkList::<i32>::new();
     let mut pos;
     let mut e;
@@ -94,3 +101,4 @@ fn main() {
     
     println!("len = {}", l.length());
 }
+ */

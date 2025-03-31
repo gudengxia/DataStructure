@@ -4,7 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+calamine = "0.20"
 
 [lib]
 lib = "mylib"
 path = "src/lib.rs"
+
+[profile.release]
+debug = true
+opt-level = 1

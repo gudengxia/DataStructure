@@ -159,3 +159,14 @@ impl EQueen{
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;   
+    #[test]
+    fn test_queen() {
+        let mut q = EQueen::new(8);
+        let num_of_solution  = q.solve();
+        println!("number of solution: {}", num_of_solution);
+    }
+}

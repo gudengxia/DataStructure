@@ -42,7 +42,7 @@ impl<T> List<T> for LinkList<T> where T: std::default::Default + Copy + std::fmt
     }
 
     fn clear(&mut self) {
-        let p = self.h.as_ref().unwrap().borrow_mut().next.take();
+        let _ = self.h.as_ref().unwrap().borrow_mut().next.take();
     }
 
 

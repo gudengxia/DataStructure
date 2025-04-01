@@ -19,7 +19,7 @@ void get_next(char T[], int next[])
         }
         else
         {
-          j = next[j];
+          j = next[j];// before i, the patterns is ([XXX],...,[XXX]), so, i stays, j jumps to next[j], continue perform the comparison beteen t[i] and t[j]
         }
     }
 }
@@ -35,12 +35,12 @@ int index_KMP(char* S, char* T, int pos)
     {
       if(j == -1 || S[i] == T[j])
         {
-	  i++;
-	  j++;
+          i++;
+          j++;
         }
       else
         {
-	  j = next[j];
+          j = next[j];
         }
     }
   free(next);

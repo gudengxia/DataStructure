@@ -6,5 +6,5 @@ pub mod double_link_list;
 pub mod libkmp;
 //pub mod link_list_box;
 
-//pub mod stack;
-//pub mod queue;
+pub mod stack;
+pub mod queue;

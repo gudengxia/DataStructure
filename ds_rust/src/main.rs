@@ -2,14 +2,44 @@
 //use ds_rust::mylib::liblist::sq_list::SqList;
 //use ds_rust::mylib::liblist::double_link_list::DLinkList;
 //use ds_rust::mylib::app::libqueen::EQueen;
-use ds_rust::mylib::liblist::libkmp::get_next;
-
+//use ds_rust::mylib::liblist::libkmp::get_next;
+//use ds_rust::mylib::libtree::binarytree::BiTree;
+use ds_rust::mylib::app::prime::{is_prime, EularSieve};
+use std::time::Instant;
 fn main(){
-    let s = String::from("abaabcac");
-    let v = s.into_bytes(); // convert string to vec<char>
-    let p = get_next(v);
-    println!("{:?}", p);
+    let n = 100000;
+    let mut eular = EularSieve::new();
+    let start1 = Instant::now();
+    eular.solve(n);
+    let duration1 = start1.elapsed();
+    println!("Eular Sieve run time:{:?}", duration1);
+
+    let start2 = Instant::now();
+    let mut ans = Vec::<usize>::new();
+    for i in 1..=n{
+        if is_prime(i)
+        {
+            ans.push(i);
+        }
+    }
+    let duration2 = start2.elapsed();
+    println!("Common method run time:{:?}", duration2);
 }
+/*fn main(){
+    let mut bt = BiTree::<char>::new();
+    let v = [Some('A'), Some('B'), None, Some('C'), None, Some('D'), None, None, Some('E'), Some('F'), None, Some('G'), None, None, None];
+    let ans = bt.build_tree(v.to_vec());
+    match ans{
+        Ok(()) => println!("init tree ok!"),
+        Err(err) => println!("init tree error: {}", err)
+    }
+    println!("Preorder Traverse:");
+    bt.preorder();
+    println!("Inorder Traverse:");
+    bt.inorder();
+    println!("Postorder Traverse:");
+    bt.postorder();
+}*/
 
 /*fn main(){
     let mut q = EQueen::new(8);
@@ -17,7 +47,7 @@ fn main(){
     println!("number of solution: {}", num_of_solution);
 }*/
 
-/* fn main() { 
+/*fn main() { 
     let mut l = DLinkList::<i32>::new();
     let mut pos;
     let mut e;
@@ -109,5 +139,4 @@ fn main(){
     l.clear();
     
     println!("len = {}", l.length());
-}
- */
+}*/

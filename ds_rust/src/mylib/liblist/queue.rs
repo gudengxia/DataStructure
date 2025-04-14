@@ -126,6 +126,7 @@ impl<T> Queue<T> for LinkQueue<T> where T: std::default::Default + Copy + std::f
         let p = self.head.as_ref().unwrap().borrow_mut().next.take();
         let e = p.as_ref().unwrap().borrow().data;
         self.head = p;
+        // A new method that is different from the one in textbook, which the one removed is next to the head, but an extra step is needed to handle the case when the last element is removed
         Ok(e)
     }
 }

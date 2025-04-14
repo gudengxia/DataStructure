@@ -80,7 +80,6 @@ mod test{
     }
 
 /*************  ✨ Codeium Command 🌟  *************/
-    #[test]
     /// why Eular Sieve preformace is worse than the common method?
     /// The data is too small?
     #[test] //why Eular Sieve preformace is worse than the common method, the data is too small?

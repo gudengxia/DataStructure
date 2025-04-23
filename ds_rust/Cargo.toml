@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 calamine = "0.20"
+num-traits = "0.2"
 
 [lib]
 lib = "mylib"

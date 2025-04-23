@@ -1,5 +1,3 @@
-use std::sync::Arc;
-
 use super::Edge;
 #[derive(Debug,Default, Clone)]
 pub struct ArcCell<E: std::default::Default + Copy + std::fmt::Display + PartialEq + PartialOrd>{
@@ -62,6 +60,47 @@ impl <T: std::default::Default + Copy + std::fmt::Display + PartialEq, E: std::d
         match self.arcs[i][j].info{
             Some(w) => Some(w),
             None => None
+        }
+    }
+
+    pub fn first_adjvex(&self, i: usize) -> Option<usize>{
+        for j in 0..self.vexnum{
+            if self.weight(i, j).is_some(){
+                return Some(j);
+            }
+        }
+        return None;
+    }
+
+    pub fn next_adjvex(&self, i: usize, j: usize) -> Option<usize>{
+        for k in j+1..self.vexnum{
+            if self.weight(i, k).is_some(){
+                return Some(k);
+            }
+        }
+        return None;
+    }
+    pub fn dfs(&mut self, i: usize, visited: &mut  Vec<bool>){
+        let mut s = Vec::<usize>::new();
+
+        visited[i] = true;
+        println!("Visit {}", self.vexs[i]);
+        s.push(i);
+
+        while let Some(k) = s.clone().last(){
+            let mut foundnextroute = false;
+            for j in 0..self.vexnum{
+                if self.weight(*k, j).is_some() && !visited[j]{
+                    visited[j] = true;
+                    println!("Visit {}", self.vexs[j]);
+                    s.push(j);
+                    foundnextroute = true;
+                    break;
+                }
+            }
+            if foundnextroute == false{
+                let _ = s.pop();
+            }
         }
     }
 }   

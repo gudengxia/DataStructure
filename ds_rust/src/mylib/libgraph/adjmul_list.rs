@@ -162,7 +162,7 @@ mod test{
         let mut g = AMLGraph::<char, usize>::new();
         let v = ['a', 'b', 'c', 'd', 'e'];
         let e = [('a','b', 13), ('a', 'd', 8), ('a', 'e', 7), ('b', 'c', 1), ('b', 'd', 4), ('c', 'd', 2), ('d', 'e', 3)];
-        let edges : Vec<_> = e.iter().map(|&(from, to, weight)| Edge::<char, usize>::new_with_ends(from, to)).collect();
+        let edges : Vec<_> = e.iter().map(|&(from, to, _)| Edge::<char, usize>::new_with_ends(from, to)).collect();
     
         g.create_udg(v.to_vec(), edges);
         let mut visited = vec![false; 5];

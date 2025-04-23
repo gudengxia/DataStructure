@@ -150,7 +150,7 @@ mod test{
         let mut g = OLGraph::<char, usize>::new();
         let v = ['a', 'b', 'c', 'd'];
         let e = [('a','b', 1), ('a', 'c', 1), ('c', 'a', 1), ('c', 'd', 1), ('d', 'a', 1), ('d', 'b', 1)];
-        let edges : Vec<_> = e.iter().map(|&(from, to, weight)| Edge::<char, usize>::new_with_ends(from, to)).collect();
+        let edges : Vec<_> = e.iter().map(|&(from, to, _)| Edge::<char, usize>::new_with_ends(from, to)).collect();
     
         g.create_dg(v.to_vec(), edges);
         let mut visited = vec![false; 4];

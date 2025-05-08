@@ -1,12 +1,12 @@
 use super::Edge;
 use std::rc::Rc;
 use core::cell::RefCell;
-struct ArcBox<E: std::default::Default + Copy + std::fmt::Display + PartialEq>{
-    tailvex: usize,
-    headvex: usize,
-    hlink: Option<Rc<RefCell<ArcBox<E>>>>,
-    tlink: Option<Rc<RefCell<ArcBox<E>>>>,
-    info: Option<E>
+pub struct ArcBox<E: std::default::Default + Copy + std::fmt::Display + PartialEq>{
+    pub tailvex: usize,
+    pub headvex: usize,
+    pub hlink: Option<Rc<RefCell<ArcBox<E>>>>,
+    pub tlink: Option<Rc<RefCell<ArcBox<E>>>>,
+    pub info: Option<E>
 }
 
 impl<E: std::default::Default + Copy + std::fmt::Display + PartialEq> ArcBox<E>{
@@ -39,8 +39,8 @@ impl<T: std::default::Default + Copy + std::fmt::Display + PartialEq, E: std::de
 
 pub struct OLGraph<T: std::default::Default + Copy + std::fmt::Display + PartialEq, E: std::default::Default + Copy + std::fmt::Display + PartialEq>{
     xlist: Vec<VexNode<T, E>>,
-    vexnum: usize,
-    arcnum: usize
+    pub vexnum: usize,
+    pub arcnum: usize
 }
 
 
@@ -49,7 +49,7 @@ impl<T: std::default::Default + Copy + std::fmt::Display + PartialEq, E: std::de
         OLGraph { xlist: Vec::new(), vexnum: 0, arcnum: 0}
     }
 
-    fn locate_vex(&self, v: T) ->Result<usize, &'static str>{
+    pub fn locate_vex(&self, v: T) ->Result<usize, &'static str>{
         let n = self.xlist.len();
         for i in 0..n{
             if self.xlist[i].data == v{
@@ -127,6 +127,38 @@ impl<T: std::default::Default + Copy + std::fmt::Display + PartialEq, E: std::de
         }
     }
 
+    pub fn firstin(&self, i: usize)->Option<Rc<RefCell<ArcBox<E>>>>{
+        match &self.xlist[i].firstin{
+            Some(e) => {
+                return Some(Rc::clone(e));
+            }
+            None => return  None
+        }
+    }   
+
+    pub fn nextin(&self, cur: Option<Rc<RefCell<ArcBox<E>>>>) -> Option<Rc<RefCell<ArcBox<E>>>>{
+        if let Some(e) = cur{
+            if let Some(arc) = &e.borrow().hlink{
+                return Some(Rc::clone(&arc))
+            } 
+        }
+        None
+    }   
+
+    pub fn weight(&self, i: usize, j:usize) ->Option<E>{
+        if self.xlist[i].firstout.is_none(){
+            return None;
+        }
+        let mut p = Some(Rc::clone(self.xlist[i].firstout.as_ref().unwrap()));
+        while let Some(ref e) = p{
+            if e.borrow().headvex == j{
+                return e.borrow().info;
+            }
+            let q = p;
+            p = self.nextarc(q);
+        }
+        None
+    }
     pub fn print(&self){
         for v in & self.xlist{
             print!("{}: ", v.data);

@@ -186,3 +186,21 @@ impl <T:  std::default::Default + Copy + std::fmt::Display + PartialEq> BiTree<T
     }
     
 }
+
+#[cfg(test)]
+mod test{
+    use super::BiTree;
+    #[test]
+    fn test_binarytree_traverse(){
+        let mut bt = BiTree::<char>::new();
+        let v = [Some('a'), Some('b'), Some('c'), None, None, Some('d'), Some('e'), None, Some('g'), None, None, Some('f'), None, None, Some('h'), None, None];
+        let _ = bt.build_tree(v.to_vec());
+        println!("preorder:");
+        bt.preorder();
+        println!("inorder:");
+        bt.inorder();
+        println!("postorder:");
+        bt.postorder();
+        println!("traverse:");
+    }
+}

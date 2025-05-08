@@ -1,20 +1,27 @@
 use ds_rust::mylib::libgraph::Edge;
-//use ds_rust::mylib::libgraph::orthogonal_list::{OLGraph};
-use ds_rust::mylib::libgraph::adjmatrix::MGraph;
-//use ds_rust::mylib::app::graph::prim::{minimum_span_tree_prim, CloseEdge};
-use ds_rust::mylib::app::graph::kruskal::{kruskal, LowCostEdge};
-fn main(){
-    let mut g = MGraph::<char, usize>::new();
-    let v = ['a', 'b', 'c', 'd', 'e', 'f'];
-    let e = [('a','b', 6), ('a', 'c', 1), ('a', 'd', 5), ('b', 'c', 5), ('b', 'e', 3), ('c', 'd', 5), ('c', 'e', 6), ('c', 'f', 4), ('d', 'f', 2), ('e', 'f', 6)];
+use ds_rust::mylib::libgraph::orthogonal_list::OLGraph;
+use ds_rust::mylib::app::graph::aov::topological;
+use ds_rust::mylib::libtree::binarytree::BiTree;
+/*fn main(){
+    let mut g = OLGraph::<char, usize>::new();
+    let v = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'];
+    let e = [('a','b', 1), ('a', 'c', 4), ('a', 'd', 1), ('a', 'l', 1), ('b', 'c', 9), ('c', 'e', 2), ('c', 'g', 3), ('c', 'h', 5), ('d', 'e', 8), ('e', 'g', 6), ('f', 'h', 1), ('g', 'l', 1), ('i', 'g', 1), ('i', 'k', 1), ('i', 'l', 1), ('j', 'l', 1), ('k', 'f', 1)];
     let edges : Vec<_> = e.iter().map(|&(from, to, weight)| Edge::<char, usize>::new_with_ends_weight(from, to, weight)).collect();
 
-    g.create_graph(v.to_vec(), edges, false);
-    //let mut visited = vec![false; 6];
-    //g.print();
-    //g.dfs(0, &mut visited);
-    let r = kruskal(&g); // (vexnum, u)
-    for i in 0 ..r.len(){
-        println!("{} -> {} : {}", r[i].head, r[i].tail, r[i].weight);
-    }
+    g.create_dg(v.to_vec(), edges);
+    let topo = topological(&g);  
+    println!("{:?}", topo)
+}*/
+
+fn main(){
+    let mut bt = BiTree::<char>::new();
+    let v = [Some('a'), Some('b'), Some('c'), None, None, Some('d'), Some('e'), None, Some('g'), None, None, Some('f'), None, None, Some('h'), None, None];
+    let _ = bt.build_tree(v.to_vec());
+    println!("preorder:");
+    bt.preorder();
+    println!("inorder:");
+    bt.inorder();
+    println!("postorder:");
+    bt.postorder();
+    println!("traverse:");
 }

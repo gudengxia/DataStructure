@@ -185,6 +185,57 @@ impl <T:  std::default::Default + Copy + std::fmt::Display + PartialEq> BiTree<T
         }
     }
     
+    pub fn traverse(&self){
+        #[derive(Clone)]
+        struct SElem<T: std::default::Default + Copy + std::fmt::Display + PartialEq>{
+            e: Rc<RefCell<BTNode<T>>>,
+            dir: usize
+        }
+        #[derive(PartialEq)]
+        enum Action{
+            HEADING,
+            BACKWARDS
+        }
+        
+        let mut s = Vec::<SElem<T>>::new();
+
+        if self.root.is_none(){
+            return;
+        }
+        let mut p = Rc::clone(self.root.as_ref().unwrap());
+        println!("Visit1 {}", p.borrow().data);
+        let mut act = Action::HEADING;
+        s.push(SElem{e: p, dir: 0usize});
+        
+        while let Some(cur_state) = s.clone().last(){
+            if act == Action::HEADING && cur_state.dir == 0 && cur_state.e.borrow().lchild.is_some() {
+                p = Rc::clone(cur_state.e.borrow().lchild.as_ref().unwrap());
+                println!("Visit1 {}", p.borrow().data);
+                act = Action::HEADING;
+                s.push(SElem{e: Rc::clone(&p), dir: 0});//case 1-1: go ahead if left child is not null
+            }else{
+                s.pop();
+                if act == Action::HEADING && cur_state.dir == 1 && cur_state.e.borrow().rchild.is_some(){
+                    p = Rc::clone(cur_state.e.borrow().rchild.as_ref().unwrap());
+                    println!("Visit1 {}", p.borrow().data);
+                    act = Action::HEADING;
+                    s.push(SElem{e: Rc::clone(&p), dir: 0});
+                    //case 1-2: go ahead if right child is not null
+                }else{
+                    if cur_state.dir == 0{
+                        println!("Visit2 {}", cur_state.e.borrow().data);
+                        act = Action::HEADING;
+                        p =  Rc::clone(&cur_state.e);
+                        s.push(SElem{e: Rc::clone(&p), dir: 1});
+                    } // case2: change direction
+                    else{
+                        println!("Visit3 {}", cur_state.e.borrow().data);
+                        act = Action::BACKWARDS;
+                    } // case 3: Backtrack: go backwords 
+                }
+            }
+        }
+    }
 }
 
 #[cfg(test)]

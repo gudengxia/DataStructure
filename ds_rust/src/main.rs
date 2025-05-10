@@ -24,4 +24,5 @@ fn main(){
     println!("postorder:");
     bt.postorder();
     println!("traverse:");
+    bt.traverse();
 }

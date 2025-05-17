@@ -63,13 +63,13 @@ pub fn list_insert_sort<T>(v: &mut Vec<T>) where T: Copy + PartialOrd{
         if v[i] < v[h]{
             next[i] = h as isize;
             h = i;
-        }
+        }//if the value is smaller than the head, the value is the new head
         else {
             let mut j = h;
             while next[j] != -1 && v[next[j] as usize] < v[i]{
                 j = next[j] as usize;
-            }
-            next[i] = next[j];
+            }// find the last value that is smaller than the value in the sorted static link list
+            next[i] = next[j];  //insert a new node
             next[j] = i as isize;
         }
     }
@@ -82,12 +82,12 @@ pub fn list_insert_sort<T>(v: &mut Vec<T>) where T: Copy + PartialOrd{
         if p != i{
             while p < i{
                 p = next[p] as usize;
-            }
+            }//the value should be in the i-th position is now in the p-th position
             (v[i], v[p]) = (v[p], v[i]);
             let q = next[p] as usize;
-            next[p] = next[i];
-            next[i] = p as isize;
-            p = q;
+            next[p] = next[i]; //update the moved value's next pointer to be the original value
+            next[i] = p as isize; //the original value's moved to the p-th position
+            p = q;//update p
         }
     }
 }
@@ -111,5 +111,29 @@ pub fn shell_insert_sort<T>(v: &mut Vec<T>) where T: Copy + PartialOrd{
                 i += step;
             }
         } 
+    }
+}
+
+pub fn bsearch_insert_sort<T>(v: &mut Vec<T>) where T: Copy + PartialOrd{
+    let n = v.len();
+    for i in 1..n{
+        let e = v[i];
+        let mut low = 0isize;
+        let mut high = (i - 1) as isize;
+        while low <= high{
+            let mid = (low + high) / 2;
+            if e < v[mid as usize]{
+                high = mid - 1;
+            }
+            else{
+                low = mid + 1;
+            }
+        }
+        let mut j = i - 1;
+        while j >= low as usize{
+            v[j + 1] = v[j];
+            j -= 1;
+        }
+        v[low as usize] = e;
     }
 }

@@ -38,7 +38,7 @@ def merge_and_warn(df1, df2):
     print(df2.columns)
     df = pd.merge(df1, df2, on = ['sno', 'sname'], how = 'outer', suffixes = ('_cur', '_his'))
     print(df.columns)
-    result_cols = ['sno', 'sname', 'warn', 'proof']
+    result_cols = ['sno', 'sname', 'diff_cur', 'diff_his', 'avg_cur', 'avg_his', 'warn', 'proof']
     r = pd.DataFrame(columns=result_cols)
     
     rows = len(df)
@@ -77,10 +77,18 @@ def merge_and_warn(df1, df2):
             sno = df.iloc[i, j]
             j = df.columns.get_loc('sname')
             sname = df.iloc[i, j]
+            j = df.columns.get_loc('diff_cur')
+            diff_cur = df.iloc[i, j]
+            j = df.columns.get_loc('diff_his')
+            diff_his = df.iloc[i, j]
+            j = df.columns.get_loc('avg_cur')
+            avg_cur = df.iloc[i, j]
+            j = df.columns.get_loc('avg_his')
+            avg_his = df.iloc[i, j]
             j = r.columns.get_loc('warn')
             warn = warning_signal
             proof = '\n'.join(warning_msg)
-            r.loc[index] = [sno, sname, warn, proof]
+            r.loc[index] = [sno, sname, diff_cur, diff_his, avg_cur, avg_his, warn, proof]
             index += 1
     return r
 

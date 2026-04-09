@@ -1,0 +1,4 @@
+1. install forgemini, which is an open-source alternative of conda
+2. conda install cmake, dlib, face_recognition, opencv-python
+3. failed to install opencv by command: conda install -c conda-forge opencv
+4. pip install opencv-python 

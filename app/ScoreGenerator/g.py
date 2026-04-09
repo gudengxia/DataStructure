@@ -6,17 +6,18 @@ import random
 excel_file = './sample.xlsx'
 col_name = 'score'  # 需要读取的列名
 n = 3  # 项数
-coeffs = [0.5, 0.3, 0.2]  # n个小数
+coeffs = [0.4, 0.4, 0.6]  # n个小数
 
 # 读取Excel
 df = pd.read_excel(excel_file)
-#cols = len(df.columns)
-#print(cols)
+cols = len(df.columns)
 numbers = df[col_name].dropna().tolist()
+print(numbers)
 result_cols = [f'分解{i+1}' for i in range(n)]
 
 for col in result_cols:
     df[col] = None
+
 for idx, num in enumerate(numbers):
     success = False
     while success == False:
@@ -34,5 +35,6 @@ for idx, num in enumerate(numbers):
             for i in range(n):
                 #print(idx, i)
                 df.loc[idx, result_cols[i]] = g_num[i]
+    print(f"Process {idx} success.")
 
 df.to_excel("r.xlsx", index=False)
